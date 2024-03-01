@@ -28,10 +28,23 @@ const userSchema = new mongoose.Schema({
     additonalDetails: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "Profile"
+        ref: "Profile",
     },
     courses: {
-        type: String,
-        
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course",
     },
-})
+    image: {
+        type: String, //image URL
+        required: true,
+    },
+    courseProgress: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "courseProgress",
+        }
+    ],
+});
+
+
+module.exports = mongoose.model("User", userSchema);
