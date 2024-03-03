@@ -1,5 +1,6 @@
-const User = require("../models/User");
+const User = require("../models/User"); //models ko import so that we can interact wuth DB using model 
 const OTP = require("../models/OTP");
+
 const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -66,8 +67,8 @@ exports.sendOTP = async(req, res) => {
             message: error.message
         })
     }
-
 };
+
 //signUp
 exports.signUp = async(req, res) => {
     try{
@@ -104,7 +105,7 @@ exports.signUp = async(req, res) => {
         if(existingUser){
             return res.status(400).json({
                 success: false,
-                message: 'User is already registered'
+                message: 'User is already registered/exists'
             });
         }
 
@@ -128,7 +129,7 @@ exports.signUp = async(req, res) => {
         }
         
         //hash pswrd
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10); //salt=10
 
         //create entry in DB
 
@@ -155,7 +156,7 @@ exports.signUp = async(req, res) => {
             success: true,
             message: 'User is registered successfully!',
             user
-        }) 
+        })
 
 
     }
@@ -165,8 +166,7 @@ exports.signUp = async(req, res) => {
             success:false,
             message: 'User cannot be registered. Plaese, try again!'
         })
-    }
-    
+    }  
 }
 
 //Login
@@ -197,7 +197,7 @@ exports.login = async(req, res) => {
             const payload = {
                 email: user.email,
                 id: user._id,
-                role: user.role
+                accountType: user.accountType
             }
             const token = jwt.sign(payload, process.env.JWT_SECRET, { // JWT --> JSON Web Token
                 expiresIn: '2h'
