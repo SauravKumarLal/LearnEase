@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
         enum:["Admin", "Student", "Instructor"], //only 3 values for accountType so, we can use enum
         required: true
     },
-    additonalDetails: {
+    additionalDetails: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Profile",

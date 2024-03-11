@@ -1,8 +1,8 @@
-const Tag = require('../models/tags');
+const Category = require('../models/category');
 
-//craeteTag ka handler fnn..
+//craeteCategory ka handler fnn..
 
-exports.createTag = async(req, res) => {
+exports.createCategory = async(req, res) => {
     try{
         //fetch data from request ki body
         const {name, description} = req.body;
@@ -12,18 +12,18 @@ exports.createTag = async(req, res) => {
                 success: false,
                 message: "All data required!"
             })
-        }
+        } 
         //create entry in db
-        const tagDetails = await Tag.create({
+        const categoryDetails = await Category.create({
             name: name,
             description: description
         });
-        console.log(tagDetails);
+        console.log(categoryDetails);
 
         //return response
         return res.status(200).json({
             success: true,
-            message: "Tag created successfully!"
+            message: "Category created successfully!"
         })
     }
     catch(error){
@@ -34,14 +34,14 @@ exports.createTag = async(req, res) => {
     }
 };
 
-//getAlltags handler function..
-exports.showAlltags = async (req, res) => {
+//getAllcategories handler function..
+exports.showAllcategories = async (req, res) => {
     try{
-        const allTags = await Tag.find({}, {name: true, description:true}); //kisi criteria ya attribute k basis pe find nhi krna chahta, jo entry hai db mei le aana bas 1 cheez make sure krna saare entry ke andar name n description hona chahiye
+        const allCategories = await Category.find({}, {name: true, description:true}); //kisi criteria ya attribute k basis pe find nhi krna chahta, jo entry hai db mei le aana bas 1 cheez make sure krna saare entry ke andar name n description hona chahiye
         res.status(200).json({
             success: true,
-            message: "All tags return successfully",
-            allTags
+            message: "All categories return successfully",
+            allCategories
         })
     }
     catch(error){

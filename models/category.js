@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const tagsSchema = new mongoose.Schema({
+const categoriesSchema = new mongoose.Schema({
     name:{
         type: String,
         require: true
@@ -10,7 +10,8 @@ const tagsSchema = new mongoose.Schema({
     course: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Course"
-    }
+    } 
 });
 
-mongoose.exports = mongoose.model("Tag", "tagsSchema");
+mongoose.exports = mongoose.model("Category", "categoriesSchema");
+
